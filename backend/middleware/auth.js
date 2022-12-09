@@ -9,11 +9,15 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req,res,next) =>{
     if(!token){
         return next(new ErrorHandler("Please Login to access this resource",401))
     }
-    
-    const decodedData = jwt.verify(token, process.env.JWT_SECRET)
-
-    req.user = await User.findById(decodedData.id)
-    next()
+     const isCustomAuth = token.length <500
+     if(token && isCustomAuth){
+     const decodedData = jwt.verify(token, process.env.JWT_SECRET)
+     req.user = await User.findById(decodedData.id)
+     }else{
+     const decodedData = jwt.decode(token)
+     req.user = decodedData?.sub
+     }
+     next()
 
 })
 
