@@ -1,0 +1,1 @@
+This is an E- commerce website. Frontend done in HTML,javascript,jQuery,ajax Css,bootstrap and backend in nodejs and database maintained in mongoDb.
