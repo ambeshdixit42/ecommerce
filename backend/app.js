@@ -37,8 +37,7 @@ app.post('/api/v1/razorpay/order',async(req,res)=>{
 
     const options ={
     amount : Number(req.body.amount * 100),
-    currency: "INR",
-    receipt: "success"
+    currency: "INR"
 }
     const response = await razorpay.orders.create(options)
 
@@ -50,7 +49,7 @@ app.post('/api/v1/razorpay/order',async(req,res)=>{
 //verification
 app.post('/api/v1/razorpay/verification',async(req,res)=>{
 
-    const {razorpay_order_id,razorpay_payment_id} = req.body
+    const {razorpay_order_id,razorpay_payment_id,razorpay_signature} = req.body
 
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
